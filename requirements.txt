@@ -1,0 +1,7 @@
+## pip install -r requirements.txt  一般使用requirements.txt作为项目依赖文件, 使用这个命令 install 项目的依赖
+## pip freeze                       查看系统已安装的包
+## pip uninstall <package_name>     删除某个包
+
+
+## JPype1, 调用 Java 类和方法, PYTHON call-> JAVA
+JPype1==1.4.1
