@@ -51,9 +51,9 @@ class PyMybatis:
         self.mybatis = Mybatis()
         self.sqlSessionFactory = self.mybatis.config(config_name)
 
-    def getSqlSession(self):
+    def getSqlSession(self, autoCommit=True):
         sqlSession = self.mybatis.getSqlSession(self.sqlSessionFactory)
-        sqlSession.getConnection().setAutoCommit(True)
+        sqlSession.getConnection().setAutoCommit(autoCommit)
         return sqlSession
 
     def beginTransaction(self, sqlSession):
