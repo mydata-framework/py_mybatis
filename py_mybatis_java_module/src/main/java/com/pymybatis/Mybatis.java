@@ -1,9 +1,10 @@
-package com.py_mybatis;
+package com.pymybatis;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.py_mybatis.vo.PageVo;
+import com.pymybatis.ext.TransactionedSqlSession;
+import com.pymybatis.vo.PageVo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -56,38 +58,37 @@ public class Mybatis {
      * 基础Mybatis测试
      */
     private static void base_test() throws IOException {
-        String resource = "demo1/mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        HashMap<String, Object> param = new HashMap<String, Object>();
-        param.put("id", 1);
-        Object o = sqlSession.selectOne("UserMapper.selectById", param);
-
-        if (o != null) {
-            HashMap res = (HashMap) o;
-            System.out.println(res);
-        } else {
-            System.out.println(o);
-        }
+//        String resource = "demo1/mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        HashMap<String, Object> param = new HashMap<String, Object>();
+//        param.put("id", 1);
+//        Object o = sqlSession.selectOne("UserMapper.selectById", param);
+//
+//        if (o != null) {
+//            HashMap res = (HashMap) o;
+//            System.out.println(res);
+//        } else {
+//            System.out.println(o);
+//        }
     }
 
     private static void framework_test() throws IOException {
         Mybatis mybatis = new Mybatis();
-
+//
         SqlSessionFactory sqlSessionFactory = mybatis.getSqlSessionFactory("demo1/mybatis-config.xml");
-        System.out.println(sqlSessionFactory);
-
+//        System.out.println(sqlSessionFactory);
+//
         SqlSession sqlSession = mybatis.getSqlSession(sqlSessionFactory);
-        System.out.println(sqlSession);
-
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("id", 1);
-
-        String one = mybatis.selectOne(sqlSession, "UserMapper.selectById", JSON.toJSONString(param));
-        System.out.println(one);
+//        System.out.println(sqlSession);
+//        HashMap<String, Object> param = new HashMap<>();
+//        param.put("id", 1);
+//
+//        String one = mybatis.selectOne(sqlSession, "UserMapper.selectById", JSON.toJSONString(param));
+//        System.out.println(one);
 //
 //        String list = mybatis.selectList(sqlSession, "UserMapper.selectList", JSON.toJSONString(param));
 //        System.out.println(list);
@@ -102,8 +103,8 @@ public class Mybatis {
 //        param.put("username", "qi long zu2 2");
 //        String insertUser = mybatis.insert(sqlSession, "insertUser", JSON.toJSONString(param), true, "id");
 //        System.out.println(insertUser);
-//        String s = mybatis.selectPage(sqlSession, "UserMapper.selectList", 2, 10, null);
-
+        String page = mybatis.selectPageByPageHelper(sqlSession, "UserMapper.selectList", 2, 10, null);
+        System.out.println(page);
     }
 
 
@@ -121,12 +122,14 @@ public class Mybatis {
      */
     public SqlSessionFactory config(String resource) throws IOException {
         InputStream inputStream = null;
-        if (resource.startsWith("/")) {
+        if (resource.startsWith("/") || resource.startsWith("\\")) {
             inputStream = new FileInputStream(new File(resource));
         } else {
             inputStream = Resources.getResourceAsStream(resource);
         }
+        System.out.println("inputStream:" + inputStream);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        System.out.println("sqlSessionFactory:" + sqlSessionFactory);
         this.sqlSessionFactory = sqlSessionFactory;
         return sqlSessionFactory;
     }
@@ -145,6 +148,16 @@ public class Mybatis {
     public SqlSession getSqlSession() {
         SqlSession sqlSession = this.sqlSessionFactory.openSession();
         return sqlSession;
+    }
+
+    /**
+     * 获得自动能够自动commit 和 close 的 SqlSession
+     * 用于可以try(这种方式可以自动提交事务)
+     */
+    public TransactionedSqlSession getTransactionedSqlSession() throws SQLException {
+        SqlSession sqlSession = this.sqlSessionFactory.openSession();
+        sqlSession.getConnection().setAutoCommit(false);
+        return new TransactionedSqlSession(sqlSession);
     }
 
     /**
@@ -179,6 +192,8 @@ public class Mybatis {
         Object o = null;
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
             if (paramJson == null || "".equals(paramJson)) {
                 o = sqlSession.selectOne(statementId);
             } else {
@@ -228,6 +243,8 @@ public class Mybatis {
         List list = null;
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
             if (paramJson == null || "".equals(paramJson)) {
                 list = sqlSession.selectList(statementId);
             } else {
@@ -279,6 +296,8 @@ public class Mybatis {
         Object o = null;
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
             if (paramJson == null || "".equals(paramJson)) {
                 o = sqlSession.selectOne(statementId);
             } else {
@@ -301,7 +320,7 @@ public class Mybatis {
     /**
      * insert
      */
-    public String insert(SqlSession sqlSession, String statementId, String paramJson, boolean commit, String keyProperty) {
+    public String insert(SqlSession sqlSession, String statementId, String paramJson, String keyProperty) {
         System.out.println("param=>" + paramJson);
         int insert = 0;
         HashMap param = null;
@@ -311,7 +330,7 @@ public class Mybatis {
             } else {
                 param = JSON.parseObject(paramJson, HashMap.class);
                 insert = sqlSession.insert(statementId, param);
-                if (commit) {
+                if (sqlSession.getConnection().getAutoCommit()) {
                     sqlSession.commit();
                 }
             }
@@ -330,18 +349,20 @@ public class Mybatis {
     /**
      * insert
      */
-    public String insert(String statementId, String paramJson, boolean commit, String keyProperty) {
+    public String insert(String statementId, String paramJson, String keyProperty) {
         System.out.println("param=>" + paramJson);
         int insert = 0;
         HashMap param = null;
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
             if (paramJson == null || "".equals(paramJson)) {
                 insert = sqlSession.insert(statementId);
             } else {
                 param = JSON.parseObject(paramJson, HashMap.class);
                 insert = sqlSession.insert(statementId, param);
-                if (commit) {
+                if (sqlSession.getConnection().getAutoCommit()) {
                     sqlSession.commit();
                 }
             }
@@ -360,7 +381,7 @@ public class Mybatis {
     /**
      * update
      */
-    public String update(SqlSession sqlSession, String statementId, String paramJson, boolean commit) {
+    public String update(SqlSession sqlSession, String statementId, String paramJson) {
         System.out.println("param=>" + paramJson);
         int update = 0;
         try {
@@ -369,7 +390,7 @@ public class Mybatis {
             } else {
                 HashMap param = JSON.parseObject(paramJson, HashMap.class);
                 update = sqlSession.update(statementId, param);
-                if (commit) {
+                if (sqlSession.getConnection().getAutoCommit()) {
                     sqlSession.commit();
                 }
             }
@@ -385,17 +406,19 @@ public class Mybatis {
     /**
      * update
      */
-    public String update(String statementId, String paramJson, boolean commit) {
+    public String update(String statementId, String paramJson) {
         System.out.println("param=>" + paramJson);
         int update = 0;
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
             if (paramJson == null || "".equals(paramJson)) {
                 update = sqlSession.update(statementId);
             } else {
                 HashMap param = JSON.parseObject(paramJson, HashMap.class);
                 update = sqlSession.update(statementId, param);
-                if (commit) {
+                if (sqlSession.getConnection().getAutoCommit()) {
                     sqlSession.commit();
                 }
             }
@@ -411,7 +434,7 @@ public class Mybatis {
     /**
      * selectPage
      */
-    public String selectPage(SqlSession sqlSession, String countStatementId, String listStatementId, Integer pageNum, Integer pageSize, String paramJson) {
+    public String selectPage(SqlSession sqlSession, String countStatementId, String listStatementId, int pageNum, int pageSize, String paramJson) {
         System.out.println("param=>" + paramJson);
         PageVo pageVo = new PageVo();
 
@@ -471,12 +494,14 @@ public class Mybatis {
     /**
      * selectPage
      */
-    public String selectPage(String countStatementId, String listStatementId, Integer pageNum, Integer pageSize, String paramJson) {
+    public String selectPage(String countStatementId, String listStatementId, int pageNum, int pageSize, String paramJson) {
         System.out.println("param=>" + paramJson);
         SqlSession sqlSession = sqlSessionFactory.openSession();
+
         PageVo pageVo = new PageVo();
         Object o = null;
         try {
+            sqlSession.getConnection().setAutoCommit(true);
             if (paramJson == null || "".equals(paramJson)) {
                 o = sqlSession.selectOne(countStatementId);
             } else {
@@ -531,9 +556,9 @@ public class Mybatis {
     /**
      * selectPage PageHelper
      */
-    public String selectPage(SqlSession sqlSession, String statementId, Integer pageNum, Integer pageSize, String paramJson) {
+    public String selectPageByPageHelper(SqlSession sqlSession, String statementId, int pageNum, int pageSize, String paramJson) {
         try {
-            System.out.println("param=>" + paramJson);
+            System.out.println("sqlSession=>" + sqlSession + ",pageNum=>" + pageNum + ",pageSize=>" + pageSize + ",param=>" + paramJson);
             PageVo pageVo = new PageVo();
             Page<Object> page = PageHelper.startPage(pageNum, pageSize);
             List<Map<String, Object>> list = new ArrayList<>();
@@ -555,11 +580,13 @@ public class Mybatis {
     /**
      * selectPage PageHelper
      */
-    public String selectPage(String statementId, Integer pageNum, Integer pageSize, String paramJson) {
+    public String selectPageByPageHelper(String statementId, int pageNum, int pageSize, String paramJson) {
         try {
-            System.out.println("param=>" + paramJson);
-            PageVo pageVo = new PageVo();
+            System.out.println("pageNum=>" + pageNum + ",pageSize=>" + pageSize + ",param=>" + paramJson);
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            sqlSession.getConnection().setAutoCommit(true);
+
+            PageVo pageVo = new PageVo();
             Page<Object> page = PageHelper.startPage(pageNum, pageSize);
             List<Map<String, Object>> list = new ArrayList<>();
             if (paramJson == null || "".equals(paramJson)) {
@@ -576,6 +603,5 @@ public class Mybatis {
             return "err";
         }
     }
-
 
 }

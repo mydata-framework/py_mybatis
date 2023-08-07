@@ -1,4 +1,4 @@
-package com.py_mybatis.vo;
+package com.pymybatis.vo;
 
 
 import java.util.List;
