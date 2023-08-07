@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*_
 # Author: ***<***gmail.com>
+import glob
 from distutils.core import setup
 
 import setuptools
@@ -13,9 +14,11 @@ setup(
     author='liutao',  # 作者
     author_email='msliutao@foxmail.com',  # 你的邮箱**
     url='https://github.com/mydata-framework/py_mybatis',  # 可以写github上的地址，或者其他地址
-    packages=setuptools.find_packages(exclude=['test', 'examples', 'script', 'tutorials']),  # 包内不需要引用的文件夹
 
-    data_files=[('', ['*'])],
+    # 打包到安装包中配置
+    packages=setuptools.find_packages(include=['*']),
+    data_files=[('', glob.glob('*'))],
+    include_package_data=True,
 
     # 依赖包
     install_requires=[
