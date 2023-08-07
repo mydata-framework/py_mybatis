@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <plugins>
+        <!--PageHelper-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+
+            <dataSource type="POOLED">
+                <property name="driver" value="com.p6spy.engine.spy.P6SpyDriver"/>
+                <property name="url" value="jdbc:p6spy:mysql://localhost:3306/mytest?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value=""/>
+            </dataSource>
+
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="demo1/mapper/UserMapper.xml"/>
+    </mappers>
+
+</configuration>
