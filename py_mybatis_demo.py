@@ -15,8 +15,7 @@ def test1():
     value = pyMybatis.selectValue(statementId='UserMapper.selectId', dictParam={'id': 1})
     print(value)
 
-    insert = pyMybatis.insert(statementId='UserMapper.insertUser', dictParam={'username': 'liutao 001'},
-                              keyProperty='id')
+    insert = pyMybatis.insert(statementId='UserMapper.insertUser', dictParam={'username': 'liutao 001'}, keyProperty='id')
     print(insert)
 
     update = pyMybatis.update(statementId="UserMapper.updateUser", dictParam={'username': 'liutao 002', 'id': 40})
@@ -25,8 +24,7 @@ def test1():
     page = pyMybatis.selectPageByPageHelper(statementId='selectList', pageNum=1, pageSize=10)
     print(page)
 
-    page = pyMybatis.selectPage(countStatementId='selectPage_count', listStatementId='selectPage_list', pageNum=1,
-                                pageSize=10)
+    page = pyMybatis.selectPage(countStatementId='selectPage_count', listStatementId='selectPage_list', pageNum=1, pageSize=10)
     print(page)
 
 
