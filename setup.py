@@ -6,8 +6,9 @@ from distutils.core import setup
 
 import setuptools
 
-setup(
 
+
+setup(
     name='py_mybatis',  # 包的名字
     version='0.0.1',  # 版本号
     description='my_mybatis',  # 描述
@@ -16,15 +17,36 @@ setup(
     url='https://github.com/mydata-framework/py_mybatis',  # 可以写github上的地址，或者其他地址
 
     # 打包到安装包中配置
-    packages=setuptools.find_packages(include=['*']),
-    data_files=[('', glob.glob('*'))],
-    include_package_data=True,
-
+    py_modules=[
+        'py_mybatis',
+        'py_mybatis_demo'
+    ],
+    data_files=[
+        (
+            'py_mybatis_demo_config',
+            [
+                'py_mybatis_demo_config/mybatis-3-config.dtd',
+                'py_mybatis_demo_config/mybatis-3-mapper.dtd',
+                'py_mybatis_demo_config/mybatis-config.xml',
+                'py_mybatis_demo_config/spy.properties',
+                'py_mybatis_demo_config/UserMapper.xml'
+            ]
+        ),
+        (
+            'py_mybatis_java_lib',
+            [
+                'py_mybatis_java_lib/fastjson-1.2.79.jar',
+                'py_mybatis_java_lib/mybatis-3.5.10.jar',
+                'py_mybatis_java_lib/mysql-connector-java-8.0.29.jar',
+                'py_mybatis_java_lib/p6spy-3.9.1.jar',
+                'py_mybatis_java_lib/py_mybatis_java_module-1.0-SNAPSHOT.jar'
+            ]
+        )
+    ],
     # 依赖包
     install_requires=[
         'JPype1==1.4.1'
     ],
-
     classifiers=[
         'Development Status :: 4 - Beta',  # Beta 阶段
         'Operating System :: Microsoft :: Windows',  # 你的操作系统
