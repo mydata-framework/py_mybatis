@@ -42,8 +42,14 @@ setup(
 
 ## 在setup.py目录下执行
 ## python  setup.py  sdist
+## python setup.py bdist_wheel 使用的这个命令成功了
+## python setup.py sdist bdist_wheel
 ## 最终生成一个dist文件夹，在文件夹里面就有一个创建好的安装包，格式为xxx.tar.gz的压缩包
 
-
-## pip install xxx.tar.gz
+## cd dist
+## pip install py_mybatis-0.0.1.tar.gz
 ## pip list   # 显示所有已安装的包
+
+## fq pip install --upgrade setuptools wheel
+## fq pip install --upgrade pip
+## pip install --no-use-pep517 py_mybatis-0.0.1.tar.gz

@@ -1,10 +1,2 @@
-include *.class
-include *.jar
-include *.xml
-include *.dtd
-include *.properties
-include *.lst
-
-recursive-include py_mybatis_demo_config *
-recursive-include py_mybatis_java_lib *
-recursive-include py_mybatis_java_module *
+include py_mybatis_demo_config
+include py_mybatis_java_lib
