@@ -67,7 +67,9 @@ java下载方式2: https://adoptium.net/zh-CN/temurin/releases/
 
 #### 安装
 
+```shell
 pip install py-mybatis
+```
 
 #### 配置
 
@@ -105,7 +107,9 @@ list = pyMybatis.selectList(statementId='UserMapper.selectList')
 ### python开发者-快速上手
 
 #### 安装
+```shell
 pip install py-mybatis
+```
 
 #### 配置
 已奖配置文件放在python安装目录, 也可以在git项目中的py_mybatis_demo_config目录下获取到
