@@ -39,6 +39,9 @@ PyMySQL 和 psycopg2-binary 的操作方式完全不同,
 java下载方式1: https://www.oracle.com/java/technologies/downloads/
 <br>
 java下载方式2: https://adoptium.net/zh-CN/temurin/releases/
+<br>
+<br>
+<br>
 
 
 
@@ -54,7 +57,7 @@ java下载方式2: https://adoptium.net/zh-CN/temurin/releases/
 
 
 
-### 小白-快速上手
+### 快速上手
 
 - 1 安装
 - 2 配置
@@ -93,6 +96,9 @@ pyMybatis.config('mybatis-config.xml')
 one = pyMybatis.selectOne(statementId='UserMapper.selectById', dictParam={'id': 1})
 list = pyMybatis.selectList(statementId='UserMapper.selectList')
 ```
+<br>
+<br>
+<br>
 
 ### python开发者-快速上手
 
@@ -104,7 +110,10 @@ pip install py-mybatis
 <br>拷贝一份到项目中, 并修改数据库链接信息
 
 #### 代码
-已经提供了 py_mybatis_demo.py 案例代码, 相信你一看就明白; 
+已经提供了 py_mybatis_demo.py 案例代码, 相信你一看就明白;
+<br>
+<br>
+<br>
 
 ### java开发者-使用python-快速上手
 java开发者的福利
