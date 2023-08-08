@@ -32,6 +32,8 @@ PyMySQL 和 psycopg2-binary 的操作方式完全不同,
 <br>
 所以我为了简单并站在巨人的肩膀上, 我使用python对java框架mybatis封装了一层,
 <br>
+如果你好奇,这里给你给你mybatis官网: https://mybatis.org/mybatis-3/zh/index.html
+<br>
 所以, 这要求你需要java环境, 如何安装java也是非常简单的事情!
 <br>
 这么简单的事情相信大家都能搞定, 我这里提供两种下载入口:
@@ -123,5 +125,32 @@ java开发者的福利
 需要会mybatis, 相信大家都会, 即使不会提供了demo, 基本的操作没啥问题 
 <br>
 py-mybatis的原理是用python包装了一层mybatis, 所以只要你会mybatis 就会使用py-mybatis
+<br>
+<br>
+<br>
+
+
+### 关于其他高级使用方法的说明
+1 如何使用其他数据库?
+<br>
+因为使用的mybatis, 所以只要mybatis支持, 当前项目就支持, 但是值得注意的是, 我没有依赖除mysql之外的驱动, 所以你需要下载对应的驱动jar包放到配置目录下,因为配置目录也是一个classpath;
+<br>
+<br>
+2 其他高级动态sql的使用
+<br>
+mybatis支持很多动态sql, 高级的用法等, 这个看mybatis官网文档就行, https://mybatis.org/mybatis-3/zh/index.html
+<br>
+<br>
+2 感觉使用到了java很鸡肋
+<br>
+这需要根据你自身的情况, 我目前没有这个感觉, 而且java的加持你的查询会有一定提升, 我目前也是把他当做工具来用, 如果你也是需要一个工具, 可以尝试尝试, 相信我 你不会失望!
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
