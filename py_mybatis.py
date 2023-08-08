@@ -59,7 +59,7 @@ class PyMybatis:
         python_installation_path = sys.executable
         split = python_installation_path.split('/bin/')
         python_path = split[0]
-        py_mybatis_java_lib_path = python_path + '/py_mybatis_java_lib'
+        py_mybatis_java_lib_path = python_path + '/py_mybatis_java_lib/*'
 
         jpype.startJVM(
             classpath=[

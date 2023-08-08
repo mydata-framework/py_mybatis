@@ -36,10 +36,12 @@ setup(
             'py_mybatis_java_lib',
             [
                 'py_mybatis_java_lib/fastjson-1.2.79.jar',
+                'py_mybatis_java_lib/jsqlparser-4.5.jar',
                 'py_mybatis_java_lib/mybatis-3.5.10.jar',
                 'py_mybatis_java_lib/mysql-connector-java-8.0.29.jar',
                 'py_mybatis_java_lib/p6spy-3.9.1.jar',
-                'py_mybatis_java_lib/py_mybatis_java_module-1.0-SNAPSHOT.jar'
+                'py_mybatis_java_lib/pagehelper-5.3.2.jar',
+                'py_mybatis_java_lib/py_mybatis_java_module-0.0.1-SNAPSHOT.jar'
             ]
         )
     ],
@@ -64,12 +66,13 @@ setup(
 
 ## 在setup.py目录下执行
 ## python  setup.py  sdist
-## python setup.py bdist_wheel 使用的这个命令成功了
+## cd dist
+## pip install py_mybatis-0.0.1.tar.gz
+
+## python setup.py bdist_wheel
 ## python setup.py sdist bdist_wheel
 ## 最终生成一个dist文件夹，在文件夹里面就有一个创建好的安装包，格式为xxx.tar.gz的压缩包
 
-## cd dist
-## pip install py_mybatis-0.0.1.tar.gz
 ## pip list   # 显示所有已安装的包
 
 ## fq pip install --upgrade setuptools wheel
