@@ -1,6 +1,7 @@
 from py_mybatis import PyMybatis
 
-pyMybatis = PyMybatis('/py_mybatis_demo_config')
+pyMybatis = PyMybatis('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demo_config')
+pyMybatis._set_env()
 pyMybatis.config('mybatis-config.xml')
 
 
