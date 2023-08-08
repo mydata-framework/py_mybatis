@@ -50,3 +50,5 @@ rebel.xml
 
 py_mybatis.egg-info/*
 
+.DS_Store
+
