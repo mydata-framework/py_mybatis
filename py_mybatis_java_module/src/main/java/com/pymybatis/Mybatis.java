@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -55,12 +57,16 @@ public class Mybatis {
      * 获取并设置 SqlSessionFactory
      */
     public SqlSessionFactory config(String resource) throws IOException {
+        Path path = Paths.get(resource);
+        boolean isAbsolutePath = path.isAbsolute();
+
         InputStream inputStream = null;
-        if (resource.startsWith("/") || resource.startsWith("\\")) {
+        if (isAbsolutePath) {
             inputStream = new FileInputStream(new File(resource));
         } else {
             inputStream = Resources.getResourceAsStream(resource);
         }
+
         System.out.println("inputStream:" + inputStream);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         System.out.println("sqlSessionFactory:" + sqlSessionFactory);
@@ -72,8 +78,11 @@ public class Mybatis {
      * 获取 SqlSessionFactory
      */
     private SqlSessionFactory getSqlSessionFactory(String resource) throws IOException {
+        Path path = Paths.get(resource);
+        boolean isAbsolutePath = path.isAbsolute();
+
         InputStream inputStream = null;
-        if (resource.startsWith("/") || resource.startsWith("\\")) {
+        if (isAbsolutePath) {
             inputStream = new FileInputStream(new File(resource));
         } else {
             inputStream = Resources.getResourceAsStream(resource);

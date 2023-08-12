@@ -1,8 +1,8 @@
-import json
 import sys
-
+import platform
 import jpype
 import jpype.imports
+import json
 
 
 # class_path = system_class_path + ":" + mysql_connector_jar_path + ":" + p6spy_connector_jar_path + ":" + mybatis_jar_path + ":" + fastjson_jar_path + ":" + project_class_path
@@ -19,6 +19,7 @@ class PyMybatis:
         self.config_name = None
         self.mybatis = None
         self.sqlSessionFactory = None
+        self.py_mybatis_java_lib_path = None
         self.env = 'users'
 
     def _set_env(self, env='dev'):
@@ -57,14 +58,17 @@ class PyMybatis:
         :return:
         """
         python_installation_path = sys.executable
-        split = python_installation_path.split('/bin/')
-        python_path = split[0]
-        py_mybatis_java_lib_path = python_path + '/py_mybatis_java_lib/*'
+        if platform.system() == "Windows":
+            pass
+        else:
+            split = python_installation_path.split('/bin/')
+            python_path = split[0]
+            self.py_mybatis_java_lib_path = python_path + '/py_mybatis_java_lib/*'
 
         jpype.startJVM(
             classpath=[
                 jpype.getDefaultJVMPath(),
-                py_mybatis_java_lib_path,
+                self.py_mybatis_java_lib_path,
                 self.class_path
             ]
         )
