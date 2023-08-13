@@ -4,8 +4,8 @@ import jpype
 import jpype.imports
 import json
 
-
-# class_path = system_class_path + ":" + mysql_connector_jar_path + ":" + p6spy_connector_jar_path + ":" + mybatis_jar_path + ":" + fastjson_jar_path + ":" + project_class_path
+# 是否windows系统
+is_windows = (platform.system() == "Windows")
 
 
 class PyMybatis:
@@ -30,27 +30,50 @@ class PyMybatis:
         开发环境下的jvm环境
         :return:
         """
-        dev_project_class_path = "/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_java_module/target/classes"
-        dev_system_class_path = '/Users/liutao/.jenv/versions/11.0/lib/dt.jar:/Users/liutao/.jenv/versions/11.0/lib/tools.jar'
-        dev_mysql_connector_jar_path = '/Users/liutao/.m2/repository/mysql/mysql-connector-java/8.0.29/mysql-connector-java-8.0.29.jar'
-        dev_p6spy_connector_jar_path = '/Users/liutao/.m2/repository/p6spy/p6spy/3.9.1/p6spy-3.9.1.jar'
-        dev_mybatis_jar_path = '/Users/liutao/.m2/repository/org/mybatis/mybatis/3.5.10/mybatis-3.5.10.jar'
-        dev_fastjson_jar_path = '/Users/liutao/.m2/repository/com/alibaba/fastjson/1.2.79/fastjson-1.2.79.jar'
-        dev_page_helper_jar_path = '/Users/liutao/.m2/repository/com/github/pagehelper/pagehelper/5.3.2/pagehelper-5.3.2.jar'
-        dev_jsqlparser_jar_path = '/Users/liutao/.m2/repository/com/github/jsqlparser/jsqlparser/4.5/jsqlparser-4.5.jar'
-        jpype.startJVM(
-            classpath=[
-                dev_system_class_path,
-                dev_project_class_path,
-                dev_mysql_connector_jar_path,
-                dev_p6spy_connector_jar_path,
-                dev_mybatis_jar_path,
-                dev_jsqlparser_jar_path,
-                dev_page_helper_jar_path,
-                dev_fastjson_jar_path,
-                self.class_path
-            ]
-        )
+        if is_windows:
+            dev_project_class_path = 'D:\\project\\githubs\\py_mybatis\\py_mybatis\\py_mybatis_java_module\\target\\classes'
+            dev_system_class_path = "D:\\Develop\\jdk\\jdk8\\lib\\tools.jar"
+            dev_mysql_connector_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\mysql\\mysql-connector-java\\8.0.29\\mysql-connector-java-8.0.29.jar'
+            dev_p6spy_connector_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\p6spy\\p6spy\\3.9.1\\p6spy-3.9.1.jar'
+            dev_mybatis_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\org\\mybatis\\mybatis\\3.5.10\\mybatis-3.5.10.jar'
+            dev_fastjson_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\com\\alibaba\\fastjson\\1.2.79\\fastjson-1.2.79.jar'
+            dev_page_helper_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\com\\github\\pagehelper\\pagehelper\\5.3.2\\pagehelper-5.3.2.jar'
+            dev_jsqlparser_jar_path = 'C:\\Users\\liutao\\.m2\\repository\\com\\github\\jsqlparser\\jsqlparser\\4.5\\jsqlparser-4.5.jar'
+            jpype.startJVM(
+                classpath=[
+                    dev_system_class_path,
+                    dev_project_class_path,
+                    dev_mysql_connector_jar_path,
+                    dev_p6spy_connector_jar_path,
+                    dev_mybatis_jar_path,
+                    dev_jsqlparser_jar_path,
+                    dev_page_helper_jar_path,
+                    dev_fastjson_jar_path,
+                    self.class_path
+                ]
+            )
+        else:
+            dev_project_class_path = "/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_java_module/target/classes"
+            dev_system_class_path = '/Users/liutao/.jenv/versions/11.0/lib/dt.jar:/Users/liutao/.jenv/versions/11.0/lib/tools.jar'
+            dev_mysql_connector_jar_path = '/Users/liutao/.m2/repository/mysql/mysql-connector-java/8.0.29/mysql-connector-java-8.0.29.jar'
+            dev_p6spy_connector_jar_path = '/Users/liutao/.m2/repository/p6spy/p6spy/3.9.1/p6spy-3.9.1.jar'
+            dev_mybatis_jar_path = '/Users/liutao/.m2/repository/org/mybatis/mybatis/3.5.10/mybatis-3.5.10.jar'
+            dev_fastjson_jar_path = '/Users/liutao/.m2/repository/com/alibaba/fastjson/1.2.79/fastjson-1.2.79.jar'
+            dev_page_helper_jar_path = '/Users/liutao/.m2/repository/com/github/pagehelper/pagehelper/5.3.2/pagehelper-5.3.2.jar'
+            dev_jsqlparser_jar_path = '/Users/liutao/.m2/repository/com/github/jsqlparser/jsqlparser/4.5/jsqlparser-4.5.jar'
+            jpype.startJVM(
+                classpath=[
+                    dev_system_class_path,
+                    dev_project_class_path,
+                    dev_mysql_connector_jar_path,
+                    dev_p6spy_connector_jar_path,
+                    dev_mybatis_jar_path,
+                    dev_jsqlparser_jar_path,
+                    dev_page_helper_jar_path,
+                    dev_fastjson_jar_path,
+                    self.class_path
+                ]
+            )
 
     def __start_users_JVM_(self):
         """
@@ -58,8 +81,10 @@ class PyMybatis:
         :return:
         """
         python_installation_path = sys.executable
-        if platform.system() == "Windows":
-            pass
+        if is_windows:
+            split = python_installation_path.split('python.exe')
+            python_path = split[0]
+            self.py_mybatis_java_lib_path = python_path + 'py_mybatis_java_lib\\*'
         else:
             split = python_installation_path.split('/bin/')
             python_path = split[0]

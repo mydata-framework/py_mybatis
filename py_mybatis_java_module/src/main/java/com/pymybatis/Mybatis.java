@@ -59,6 +59,7 @@ public class Mybatis {
     public SqlSessionFactory config(String resource) throws IOException {
         Path path = Paths.get(resource);
         boolean isAbsolutePath = path.isAbsolute();
+        System.out.println("isAbsolutePath:" + isAbsolutePath);
 
         InputStream inputStream = null;
         if (isAbsolutePath) {
@@ -66,7 +67,6 @@ public class Mybatis {
         } else {
             inputStream = Resources.getResourceAsStream(resource);
         }
-
         System.out.println("inputStream:" + inputStream);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         System.out.println("sqlSessionFactory:" + sqlSessionFactory);
