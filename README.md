@@ -5,38 +5,40 @@
 python下,一个简单好用的orm框架.
 <br>
 <br>
-在平时工作中,我需要同时连接mysql和postgresql或其他的数据库, 
+在平时工作中,你可能连接了不同的数据库,可能是 MySQL PostgreSQL ORACLE SQLServer 等, 
 <br>
-可能是做一些简单的数据整合, 导出excel等操作,
+可能是做一些简单的数据整合,也可能是做数据导出,转换到excel等操作,
 <br>
-而同时我又不太想学习 SQLAlchemy, 也不能说做一个Django项目来使用它的ORM,
+又不太想学习SQLAlchemy,也不想学习Django只是为了使用它的ORM模块,
 <br>
-所以我选择简单好用的 PyMySQL 和 psycopg2-binary 分别连接和操作 mysql 和 postgresql,
+当然,你可以选择 PyMySQL 和 psycopg2-binary 分别连接和操作 MySQL 和 PostgreSQL,
 <br>
-PyMySQL 和 psycopg2-binary 的操作方式完全不同,
+但是, PyMySQL 和 psycopg2-binary 这些包的操作方式完全不同,
 <br>
-并且, PyMySQL 和 psycopg2-binary 对查询一条数据的返回方式不同, 一个是dict, 一个是元组,
+而且, PyMySQL 和 psycopg2-binary 对查询一条数据的返回方式不同, 一个是dict, 一个是元组,
 <br>
-虽然我的需求完成了, 但是没有统一的api, 这种方式我不喜欢, 
+虽然需求完成了,难道连接一个数据库就需要再选择一个框架?
 <br>
-所以我需要一个, 支持连接多种数据库, 具有统一的api操作查询, 并且使用同样简单方便的工具,
+因为每个框架的使用方式不同,没有统一的api,这种方式我不喜欢, 
 <br>
-它不能太重, 要轻量, 简单, 一看就会的那种!!!
+所以我们需要一个, 支持连接多种数据库, 具有统一的api操作查询, 并且使用同样简单方便的工具,
 <br>
-所以, 我用了这两天把py-mybatis整出来, 用来满足平时的使用, 
+它不能太重, 要轻量, 简单, 一看就会的那种, mybatis  !!!
 <br>
-开源,希望能帮助到具有相同需要的人,需要这个工具的人;
+所以, py-mybatis 被整出来, 以用来满足我们平时的使用, 还是那种熟悉的感觉 !!!
+<br>
+希望能帮助到具有相同需要的人,需要这个工具的人;
 <br>
 <br>
-注意: 由于我是一个java开发者,使用python从学习到写代码也就这两周时间,
+注意: 
 <br>
-所以我为了简单并站在巨人的肩膀上, 我使用python对java框架mybatis封装了一层,
+I'm a Java Developer, and i like Python! so i fused them together by jpype! 
 <br>
-如果你好奇,这里给你给你mybatis官网: https://mybatis.org/mybatis-3/zh/index.html
+So you must hava Python environment and Java environment, These are all simple things;
 <br>
-所以, 这要求你需要java环境, 如何安装java也是非常简单的事情!
+关于mybatis的使用,这里给出mybatis官网: https://mybatis.org/mybatis-3/zh/index.html
 <br>
-这么简单的事情相信大家都能搞定, 我这里提供两种下载入口:
+并且提供一下两种Java的下载路径:
 <br>
 java下载方式1: https://www.oracle.com/java/technologies/downloads/
 <br>
