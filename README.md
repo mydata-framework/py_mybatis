@@ -100,6 +100,11 @@ pyMybatis.config('mybatis-config.xml')
 one = pyMybatis.selectOne(statementId='UserMapper.selectById', dictParam={'id': 1})
 list = pyMybatis.selectList(statementId='UserMapper.selectList')
 ```
+
+#### 注意事项
+1 请不要使用中文路径作为配置路径,中文路径可能导致读取不到配置文件;
+<br>
+2 如果没有java环境,需要你安装java环境
 <br>
 <br>
 <br>
