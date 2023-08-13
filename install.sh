@@ -1,14 +1,14 @@
 pip uninstall py-mybatis
 
-cd py_mybatis_java_module
+#cd py_mybatis_java_module
 
-mvn clean
+#mvn clean
 
-mvn package
+#mvn package
 
-cd ..
+#cd ..
 
-mv ./py_mybatis_java_module/target/py_mybatis_java_module-0.0.1-SNAPSHOT.jar ./py_mybatis_java_lib
+#mv ./py_mybatis_java_module/target/py_mybatis_java_module-0.0.1-SNAPSHOT.jar ./py_mybatis_java_lib/py_mybatis_java_module-0.0.1-SNAPSHOT.jar
 
 rm -rf ./dist
 
@@ -20,5 +20,5 @@ python  setup.py  sdist
 
 cd dist
 
-pip install py_mybatis-0.0.1.tar.gz
+pip install py_mybatis-0.0.2.tar.gz
 

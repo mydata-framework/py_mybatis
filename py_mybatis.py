@@ -1,8 +1,11 @@
-import sys
+# encoding: utf-8
+# -*- coding: utf-8 -*-
+
+import json
 import platform
+import sys
 import jpype
 import jpype.imports
-import json
 
 # 是否windows系统
 is_windows = (platform.system() == "Windows")

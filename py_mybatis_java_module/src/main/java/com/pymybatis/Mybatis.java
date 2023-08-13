@@ -57,6 +57,7 @@ public class Mybatis {
      * 获取并设置 SqlSessionFactory
      */
     public SqlSessionFactory config(String resource) throws IOException {
+        System.out.println("resource:" + resource);
         Path path = Paths.get(resource);
         boolean isAbsolutePath = path.isAbsolute();
         System.out.println("isAbsolutePath:" + isAbsolutePath);
