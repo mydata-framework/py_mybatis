@@ -68,6 +68,7 @@ def test2():
 
 
 def test3():
+    ## with 语句会自动执行扩展的sqlSession的close方法,由于返回的是扩展的sqlSession对close方法做了commit()然后再colse()
     with pyMybatis.getTransactionedSqlSession() as sqlSession:
         insert = pyMybatis.insert(sqlSession=sqlSession, statementId='UserMapper.insertUser', dictParam={'username': 'liutao 007'}, keyProperty='id')
         print(insert)
