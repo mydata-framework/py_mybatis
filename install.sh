@@ -20,5 +20,5 @@ python  setup.py  sdist
 
 cd dist
 
-pip install py_mybatis-0.0.2.tar.gz
+pip install py_mybatis-0.0.3.tar.gz
 

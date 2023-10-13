@@ -10,7 +10,7 @@ import setuptools
 
 setup(
     name='py_mybatis',  # 包的名字
-    version='0.0.2',  # 版本号
+    version='0.0.3',  # 版本号
     description='my_mybatis',  # 描述
     author='liutao',  # 作者
     author_email='msliutao@foxmail.com',  # 你的邮箱**
