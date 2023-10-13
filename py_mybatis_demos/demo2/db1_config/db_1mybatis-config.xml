@@ -26,7 +26,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="UserMapper.xml"/>
+        <mapper resource="db1_config/db1_mapper/user_mapper.xml"/>
     </mappers>
 
 </configuration>
