@@ -4,11 +4,11 @@ from py_mybatis import JavaEnv, PyMybatis
 
 if py_mybatis.is_windows:
     java_env = JavaEnv('dev')
-    java_env.append_class_path('D:\\project\\githubs\\py_mybatis\\py_mybatis\\py_mybatis_demo_config_win')
+    java_env.append_class_path('D:\\project\\githubs\\py_mybatis\\py_mybatis\\mybatis_config')
     java_env.start_jvm()
 else:
     java_env = JavaEnv('dev')
-    java_env.append_class_path('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demo_config')
+    java_env.append_class_path('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demos/demo1/mybatis_config')
     java_env.start_jvm()
 
 

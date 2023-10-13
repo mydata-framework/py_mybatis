@@ -23,13 +23,13 @@ setup(
     ],
     data_files=[
         (
-            'py_mybatis_demo_config',
+            'mybatis_config',
             [
-                'py_mybatis_demo_config/mybatis-3-config.dtd',
-                'py_mybatis_demo_config/mybatis-3-mapper.dtd',
-                'py_mybatis_demo_config/mybatis-config.xml',
-                'py_mybatis_demo_config/spy.properties',
-                'py_mybatis_demo_config/UserMapper.xml'
+                'mybatis_config/mybatis-3-config.dtd',
+                'mybatis_config/mybatis-3-mapper.dtd',
+                'mybatis_config/mybatis-config.xml',
+                'mybatis_config/spy.properties',
+                'mybatis_config/UserMapper.xml'
             ]
         ),
         (

@@ -95,7 +95,7 @@ pip install py-mybatis
 ## 1 引入包
 from py_mybatis import PyMybatis
 ## 2 指定配置文件目录的全路径
-pyMybatis = PyMybatis('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demo_config')
+pyMybatis = PyMybatis('/Users/liutao/project/githubs_my/py_mybatis/mybatis_config')
 ## 3 指定配置文件名称
 pyMybatis.config('mybatis-config.xml')
 ## 4 查询 (sql写在UserMapper.xml中)
