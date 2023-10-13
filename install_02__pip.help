@@ -1,3 +1,18 @@
+## 1 然后移除 py_mybatis_demos py_mybatis_java_module 等没必要的目录进行后续
+LICENSE
+README.md
+py_mybatis.py
+py_mybatis_java_lib
+requirements.txt
+setup.py
+
+
+## 2 然后注意 setup.py 指定的打包的目录是否一致, 如果有更换更新jar包等需要修改
+
+
+## 3 修改setup.py版本号继续
+
+
 要将您的软件包上传到官方 Python Package Index（PyPI）上，让其他人能够使用 pip install 安装，
 您需要遵循以下步骤：
 
@@ -9,7 +24,7 @@
 
 shell
 
-pip install twine
+pip install twine        #已经安装过了跳过     ##版本提示 python 3.9.9  twine 4.0.2
 ```
 
 构建软件包：在命令行中进入软件包的根目录，并运行以下命令，以构建软件包的发布版本：
@@ -28,7 +43,13 @@ twine upload dist/*
 
 这将会提示您输入 PyPI 账户的凭据，以便进行上传。
 
+
+
 验证发布：上传完成后，您可以访问您的 PyPI 账户，查看您的软件包是否已成功发布。
+
+地址: https://pypi.org/
+
+然后尝试 pip install py-mybatis
 
 
 

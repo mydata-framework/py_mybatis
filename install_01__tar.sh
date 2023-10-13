@@ -1,3 +1,5 @@
+
+
 pip uninstall py-mybatis
 
 cd py_mybatis_java_module
@@ -16,9 +18,5 @@ rm -rf ./py_mybatis.egg-info
 
 rm -rf ./__pycache__
 
-python  setup.py  sdist
 
-cd dist
-
-pip install py_mybatis-0.0.3.tar.gz
-
+## 然后移除 py_mybatis_demos py_mybatis_java_module 目录进行后续
