@@ -1,15 +1,18 @@
 import py_mybatis
-from py_mybatis import PyMybatis
+
+from py_mybatis import JavaEnv, PyMybatis
 
 if py_mybatis.is_windows:
-    pyMybatis = PyMybatis('D:\\project\\githubs\\py_mybatis\\py_mybatis\\py_mybatis_demo_config_win')
-    pyMybatis._set_env()
-    pyMybatis.config('mybatis-config.xml')
+    java_env = JavaEnv('dev')
+    java_env.append_class_path('D:\\project\\githubs\\py_mybatis\\py_mybatis\\py_mybatis_demo_config_win')
+    java_env.start_jvm()
 else:
-    pyMybatis = PyMybatis('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demo_config')
-    pyMybatis._set_env()
-    pyMybatis.config('mybatis-config.xml')
+    java_env = JavaEnv('dev')
+    java_env.append_class_path('/Users/liutao/project/githubs_my/py_mybatis/py_mybatis_demo_config')
+    java_env.start_jvm()
 
+
+pyMybatis = PyMybatis('mybatis-config.xml')
 
 
 def test1():
