@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="db1">
+
+    <insert id="insert_user" useGeneratedKeys="true" keyProperty="id">
+        insert into user1 ( username ) values ( #{username} )
+    </insert>
+
+    <select id="select_user_by_id" resultType="map">
+        select * from user1 where id = #{id}
+    </select>
+
+</mapper>

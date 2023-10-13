@@ -152,6 +152,9 @@ class PyMybatis:
     def getTransactionedSqlSession(self):
         return self.mybatis.getTransactionedSqlSession()
 
+    def getTs(self):
+        return self.mybatis.getTransactionedSqlSession()
+
     def selectOne(self, sqlSession=None, statementId=None, dictParam=None):
         if dictParam is None:
             dictParam = ''
